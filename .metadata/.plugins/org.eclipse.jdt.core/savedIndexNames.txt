@@ -1,0 +1,4 @@
+INDEX VERSION 1.127+C:\Users\Radonja\Desktop\OOP2-2016\projekti\.metadata\.plugins\org.eclipse.jdt.core
+2812827087.index
+708840587.index
+4256491341.index

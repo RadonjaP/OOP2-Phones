@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy package &apos;server&apos; to &apos;ServerEJBTest/ejbModule&apos;&#x0D;&#x0A;- Original project: &apos;ServerTest&apos;&#x0D;&#x0A;- Destination element: &apos;ServerEJBTest/ejbModule&apos;&#x0D;&#x0A;- Original element: &apos;ServerTest/src/server&apos;" description="Copy package" destination="=ServerEJBTest/ejbModule" element1="/src&lt;server" flags="589830" fragments="1" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyPackages" stamp="1464432176853" version="1.0"/>
+</session>

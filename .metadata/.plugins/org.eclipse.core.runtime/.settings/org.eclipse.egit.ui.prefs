@@ -1,0 +1,3 @@
+BranchProjectTracker__C\:\\Users\\Radonja\\Desktop\\OOP2\ -\ Checkers\\.git_branch_radonja=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<projects branch\="branch_radonja">\r\n<project>/</project>\r\n</projects>
+commit_dialog_history_messages=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<messages>\r\n<message>Whole logic has been changed from HashMap to matrix of Field types.&\#x0A;Classes Figure,Field,Move,JumpMove and Helpers added.&\#x0A;Main logic is in class CheckersTable&\#x0A;\!\!\! Not completely tested \!\!\!</message>\r\n</messages>
+eclipse.preferences.version=1

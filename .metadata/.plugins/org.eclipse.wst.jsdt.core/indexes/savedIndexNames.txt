@@ -1,0 +1,2 @@
+INDEX VERSION 1.3+C:\Users\Radonja\Desktop\OOP2-2016\projekti\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+2812827087.index

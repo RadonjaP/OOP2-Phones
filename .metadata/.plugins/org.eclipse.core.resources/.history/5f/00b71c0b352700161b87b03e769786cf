@@ -1,0 +1,17 @@
+package client;
+
+import javax.naming.InitialContext;
+
+import beans.TestBeanRemote;
+
+public class TestClient {
+
+	public static TestBeanRemote tbr;
+	public static InitialContext ctx;
+	
+	public static void main(String[] args) {
+		
+
+	}
+
+}

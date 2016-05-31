@@ -1,0 +1,22 @@
+package client;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import beans.TestBeanRemote;
+
+public class TestClient {
+
+	public static TestBeanRemote tbr;
+	public static InitialContext ctx;
+	
+	public static void main(String[] args) throws NamingException {
+		ctx = new InitialContext();
+		
+		tbr = (TestBeanRemote)ctx.lookup("ejb:/ServerTest//TestBean!TestBeanRemote");
+		
+		System.out.println(tbr.getMessage());
+
+	}
+
+}

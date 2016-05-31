@@ -1,0 +1,58 @@
+package oop2.teorijske.v09.ssluzba.entities;
+
+import java.io.Serializable;
+import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
+public class Student implements Serializable {
+	private static final long serialVersionUID = 1L;
+	// svaki student ima broj indeksa (kljuc), ime i godinu studija
+	@Id
+	private String index;
+	private String ime;
+	private int godina;
+	// ispiti koje je student polagao. ovde navodimo da se klasa Polaganje
+	// referencira na studenta u svom polju "student"
+//	@OneToMany(mappedBy = "student")
+//	private List<Polaganje> ispiti;
+
+	@Override
+	public String toString() {
+		return index + " " + ime + " " + godina + ". godina";
+	}
+
+	public String getIndex() {
+		return index;
+	}
+
+	public void setIndex(String index) {
+		this.index = index;
+	}
+
+	public String getIme() {
+		return ime;
+	}
+
+	public void setIme(String ime) {
+		this.ime = ime;
+	}
+
+	public int getGodina() {
+		return godina;
+	}
+
+	public void setGodina(int godina) {
+		this.godina = godina;
+	}
+
+	public List<Polaganje> getIspiti() {
+		return ispiti;
+	}
+
+	public void setIspiti(List<Polaganje> ispiti) {
+		this.ispiti = ispiti;
+	}
+}

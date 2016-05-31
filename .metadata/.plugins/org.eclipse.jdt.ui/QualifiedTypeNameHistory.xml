@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="javax.swing.text.html.AccessibleHTML.TableElementInfo.TableAccessibleContext"/>
+<fullyQualifiedTypeName name="checkers.entity.JumpMove"/>
+<fullyQualifiedTypeName name="checkers.entity.Field"/>
+<fullyQualifiedTypeName name="checkers.entity.Figure"/>
+<fullyQualifiedTypeName name="checkers.entity.Move"/>
+<fullyQualifiedTypeName name="checkers.entity.CheckersTable"/>
+<fullyQualifiedTypeName name="java.lang.Exception"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="com.sun.javafx.collections.MappingChange.Map"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.util.Iterator"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="java.util.Collection"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="checkers.helpers.Helpers"/>
+<fullyQualifiedTypeName name="checkers.entity.JumpCouple"/>
+<fullyQualifiedTypeName name="checkers.entity.Coordinates"/>
+<fullyQualifiedTypeName name="checkers.table.CheckersTableInterface"/>
+<fullyQualifiedTypeName name="java.lang.Override"/>
+<fullyQualifiedTypeName name="test.ServerTest"/>
+<fullyQualifiedTypeName name="test.ServerTestRemote"/>
+<fullyQualifiedTypeName name="javax.ejb.Stateless"/>
+<fullyQualifiedTypeName name="javax.naming.NamingException"/>
+<fullyQualifiedTypeName name="test.TestBean"/>
+<fullyQualifiedTypeName name="test.TestBeanRemote"/>
+<fullyQualifiedTypeName name="javax.ejb.Remote"/>
+<fullyQualifiedTypeName name="javax.ejb.EJB"/>
+<fullyQualifiedTypeName name="com.sun.xml.internal.fastinfoset.sax.Properties"/>
+<fullyQualifiedTypeName name="com.sun.xml.internal.bind.CycleRecoverable.Context"/>
+<fullyQualifiedTypeName name="java.util.Properties"/>
+<fullyQualifiedTypeName name="javax.naming.Context"/>
+<fullyQualifiedTypeName name="server.TestServer"/>
+<fullyQualifiedTypeName name="server.TestServerRemote"/>
+<fullyQualifiedTypeName name="javax.naming.InitialContext"/>
+<fullyQualifiedTypeName name="beans.TestBeanRemote"/>
+</qualifiedTypeNameHistroy>
