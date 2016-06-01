@@ -14,7 +14,7 @@ public class Phone implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 
 	@Column(name="BATTERY_CAPACITY")
@@ -27,10 +27,17 @@ public class Phone implements Serializable {
 
 	private int memory;
 
+	private String model;
+
+	@Column(name="OPERATING_SYSTEM")
+	private String operatingSystem;
+
 	@Column(name="PICTURE_ADDRESS")
 	private String pictureAddress;
 
 	private int price;
+
+	private String producer;
 
 	@Column(name="RESOLUTION_X")
 	private int resolutionX;
@@ -85,6 +92,22 @@ public class Phone implements Serializable {
 		this.memory = memory;
 	}
 
+	public String getModel() {
+		return this.model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public String getOperatingSystem() {
+		return this.operatingSystem;
+	}
+
+	public void setOperatingSystem(String operatingSystem) {
+		this.operatingSystem = operatingSystem;
+	}
+
 	public String getPictureAddress() {
 		return this.pictureAddress;
 	}
@@ -99,6 +122,14 @@ public class Phone implements Serializable {
 
 	public void setPrice(int price) {
 		this.price = price;
+	}
+
+	public String getProducer() {
+		return this.producer;
+	}
+
+	public void setProducer(String producer) {
+		this.producer = producer;
 	}
 
 	public int getResolutionX() {

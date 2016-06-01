@@ -2,7 +2,6 @@ package entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
@@ -10,12 +9,15 @@ import java.util.List;
  * 
  */
 @Entity
-@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
+@NamedQueries({ 
+	@NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
+	@NamedQuery(name = "User.getUserByUsername", query="SELECT u FROM User u WHERE u.username = :username"),
+	@NamedQuery(name = "User.getLoggedUser", query = "SELECT u FROM User u WHERE u.username =:username AND u.password=:password") })
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 
 	private String description;
@@ -27,22 +29,12 @@ public class User implements Serializable {
 
 	private String name;
 
+	private String password;
+
 	@Column(name="PICTURE_ADDRESS")
 	private String pictureAddress;
 
 	private String username;
-
-	//bi-directional many-to-one association to Auction
-	@OneToMany(mappedBy="owner")
-	private List<Auction> myAuctions;
-
-	//bi-directional many-to-one association to Auction
-	@OneToMany(mappedBy="bidder")
-	private List<Auction> myBids;
-
-	//bi-directional many-to-one association to Comment
-	@OneToMany(mappedBy="user")
-	private List<Comment> comments;
 
 	public User() {
 	}
@@ -87,6 +79,14 @@ public class User implements Serializable {
 		this.name = name;
 	}
 
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public String getPictureAddress() {
 		return this.pictureAddress;
 	}
@@ -101,72 +101,6 @@ public class User implements Serializable {
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public List<Auction> getMyAuctions() {
-		return this.myAuctions;
-	}
-
-	public void setMyAuctions(List<Auction> auctions1) {
-		this.myAuctions = auctions1;
-	}
-
-	public Auction addAuctions1(Auction auctions1) {
-		getMyAuctions().add(auctions1);
-		auctions1.setOwner(this);
-
-		return auctions1;
-	}
-
-	public Auction removeAuctions1(Auction auctions1) {
-		getMyAuctions().remove(auctions1);
-		auctions1.setOwner(null);
-
-		return auctions1;
-	}
-
-	public List<Auction> getMyBids() {
-		return this.myBids;
-	}
-
-	public void setMyBids(List<Auction> auctions2) {
-		this.myBids = auctions2;
-	}
-
-	public Auction addAuctions2(Auction auctions2) {
-		getMyBids().add(auctions2);
-		auctions2.setBidder(this);
-
-		return auctions2;
-	}
-
-	public Auction removeAuctions2(Auction auctions2) {
-		getMyBids().remove(auctions2);
-		auctions2.setBidder(null);
-
-		return auctions2;
-	}
-
-	public List<Comment> getComments() {
-		return this.comments;
-	}
-
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
-	}
-
-	public Comment addComment(Comment comment) {
-		getComments().add(comment);
-		comment.setUser(this);
-
-		return comment;
-	}
-
-	public Comment removeComment(Comment comment) {
-		getComments().remove(comment);
-		comment.setUser(null);
-
-		return comment;
 	}
 
 }
