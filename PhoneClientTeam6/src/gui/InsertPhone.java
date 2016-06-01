@@ -1,7 +1,5 @@
 package gui;
 
-
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -12,29 +10,40 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+import javax.naming.NamingException;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import com.sun.xml.internal.bind.v2.TODO;
 
-
+import beans.BeansManagerTeam6;
+import beans.StatelessBeanTeam6;
+import beans.StatelessBeanTeam6Remote;
+import db.DBManagerTeam6;
+import entity.Phone;
 
 @SuppressWarnings("serial")
 public class InsertPhone extends JFrame {
 	public static final Image image = Toolkit.getDefaultToolkit().createImage(Login.class.getResource("res/logo.jpg"));
 	private Border border = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2);
-
-	public InsertPhone() {
+	
+	private StatelessBeanTeam6Remote sbr;
+	
+	public InsertPhone(StatelessBeanTeam6Remote sbr) {
+		this.sbr = sbr;
 		JLabel bect = new JLabel(new ImageIcon(Login.class.getResource("res/unoss.jpg")));
 		setContentPane(bect);
 		bect.setLayout(new BoxLayout(bect, BoxLayout.Y_AXIS));
@@ -52,28 +61,41 @@ public class InsertPhone extends JFrame {
 		bect.add(insertBatteryCapacity());
 		bect.add(insertPrice());
 		bect.add(insertPicture());
+		bect.add(savePhone());
 	}
 
 	private JPanel insertProduce() {
-		JLabel lblProduce = new JLabel("Produce");
-		lblProduce.setFont(new Font("Traditional Arabic", Font.BOLD, 16));
-		lblProduce.setForeground(Color.black);
-		lblProduce.setMinimumSize(new Dimension(130, 30));
-		lblProduce.setMaximumSize(new Dimension(130, 30));
-		lblProduce.setPreferredSize(new Dimension(130, 30));
+		JLabel lblProducer = new JLabel("Producer");
+		lblProducer.setFont(new Font("Traditional Arabic", Font.BOLD, 16));
+		lblProducer.setForeground(Color.black);
+		lblProducer.setMinimumSize(new Dimension(130, 30));
+		lblProducer.setMaximumSize(new Dimension(130, 30));
+		lblProducer.setPreferredSize(new Dimension(130, 30));
 
-		JTextField txtProduce = new JTextField();
-		txtProduce.setMaximumSize(new Dimension(200, 30));
-		txtProduce.setMinimumSize(new Dimension(200, 30));
-		txtProduce.setPreferredSize(new Dimension(200, 30));
-		txtProduce.setBorder(border);
-		txtProduce.setForeground(Color.gray);
+		JComboBox<String> txtProducer = new JComboBox<>();
+		txtProducer.setMaximumSize(new Dimension(200, 30));
+		txtProducer.setMinimumSize(new Dimension(200, 30));
+		txtProducer.setPreferredSize(new Dimension(200, 30));
+		txtProducer.setBorder(border);
+		txtProducer.setForeground(Color.gray);
+		txtProducer.addItem("Alcatel");
+		txtProducer.addItem("Apple");
+		txtProducer.addItem("Coolpad");
+		txtProducer.addItem("HTC");
+		txtProducer.addItem("Huawei");
+		txtProducer.addItem("Lenovo");
+		txtProducer.addItem("LG");
+		txtProducer.addItem("Microsoft");
+		txtProducer.addItem("Nokia");
+		txtProducer.addItem("Samsung");
+		txtProducer.addItem("Sony");
 
-		JPanel pnlProduce = new JPanel(new FlowLayout(FlowLayout.RIGHT, 0, 0));;
+		JPanel pnlProduce = new JPanel(new FlowLayout(FlowLayout.RIGHT, 0, 0));
+		;
 		pnlProduce.setOpaque(false);
 		pnlProduce.setMaximumSize(new Dimension(350, 40));
-		pnlProduce.add(lblProduce);
-		pnlProduce.add(txtProduce);
+		pnlProduce.add(lblProducer);
+		pnlProduce.add(txtProducer);
 		return pnlProduce;
 	}
 
@@ -108,12 +130,16 @@ public class InsertPhone extends JFrame {
 		lblOperatingSystem.setMaximumSize(new Dimension(130, 30));
 		lblOperatingSystem.setPreferredSize(new Dimension(130, 30));
 
-		JTextField txtOperatingSystem = new JTextField();
+		JComboBox<String> txtOperatingSystem = new JComboBox<>();
 		txtOperatingSystem.setMaximumSize(new Dimension(200, 30));
 		txtOperatingSystem.setMinimumSize(new Dimension(200, 30));
 		txtOperatingSystem.setPreferredSize(new Dimension(200, 30));
 		txtOperatingSystem.setBorder(border);
 		txtOperatingSystem.setForeground(Color.gray);
+		txtOperatingSystem.addItem("Android");
+		txtOperatingSystem.addItem("IOS");
+		txtOperatingSystem.addItem("Windows");
+		txtOperatingSystem.addItem("Simbian");
 
 		JPanel pnlOperatingSystem = new JPanel(new FlowLayout(FlowLayout.RIGHT, 0, 0));
 		pnlOperatingSystem.setOpaque(false);
@@ -329,9 +355,7 @@ public class InsertPhone extends JFrame {
 		pnlPrice.add(txtPrice);
 		return pnlPrice;
 	}
-	
-	
-	
+
 	private JPanel insertPicture() {
 		JButton btnPicture = new JButton("Insert picture");
 		btnPicture.setFont(new Font("Traditional Arabic", Font.BOLD, 16));
@@ -345,45 +369,80 @@ public class InsertPhone extends JFrame {
 		lbl.setMaximumSize(new Dimension(200, 190));
 		lbl.setPreferredSize(new Dimension(200, 190));
 
-		
-		btnPicture.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				JFileChooser file=new JFileChooser();
+		btnPicture.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser file = new JFileChooser();
 				file.setCurrentDirectory(new File(System.getProperty("user.home")));
-				FileNameExtensionFilter filter=new FileNameExtensionFilter("*.Images", "jpg","gif","png");
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("*.Images", "jpg", "gif", "png");
 				file.addChoosableFileFilter(filter);
-				int result=file.showSaveDialog(null);
-				if (result==JFileChooser.APPROVE_OPTION){
-					File selecredFile=file.getSelectedFile();
-					String path=selecredFile.getAbsolutePath();
-					ImageIcon myImage=new ImageIcon(path);
-					Image img=myImage.getImage();
-					Image newImage=img.getScaledInstance(lbl.getWidth(), lbl.getHeight(), Image.SCALE_SMOOTH);
-					ImageIcon image=new ImageIcon(newImage);
+				int result = file.showSaveDialog(null);
+				if (result == JFileChooser.APPROVE_OPTION) {
+					File selecredFile = file.getSelectedFile();
+					String path = selecredFile.getAbsolutePath();
+					ImageIcon myImage = new ImageIcon(path);
+					Image img = myImage.getImage();
+					Image newImage = img.getScaledInstance(lbl.getWidth(), lbl.getHeight(), Image.SCALE_SMOOTH);
+					ImageIcon image = new ImageIcon(newImage);
 					lbl.setIcon(image);
-				}
-				else if(result==JFileChooser.CANCEL_OPTION){
+				} else if (result == JFileChooser.CANCEL_OPTION) {
 					System.out.println("No file select");
 				}
 			}
 		});
 
-
-		JPanel pnlName = new JPanel(new FlowLayout(FlowLayout.RIGHT, 0, 0));
-		pnlName.setOpaque(false);
-		pnlName.setMaximumSize(new Dimension(350, 300));
-		pnlName.add(btnPicture);
-		pnlName.add(lbl);
-		return pnlName;
+		JPanel pnlPicture = new JPanel(new FlowLayout(FlowLayout.RIGHT, 0, 0));
+		pnlPicture.setOpaque(false);
+		pnlPicture.setMaximumSize(new Dimension(350, 300));
+		pnlPicture.add(btnPicture);
+		pnlPicture.add(lbl);
+		return pnlPicture;
 	}
 	
-	public static void main(String[] args) {
+	public JPanel savePhone(){
+		JButton btnSave = new JButton("Save phone");
+		btnSave.setFont(new Font("Traditional Arabic", Font.BOLD, 16));
+		btnSave.setForeground(Color.black);
+		btnSave.setMinimumSize(new Dimension(130, 30));
+		btnSave.setMaximumSize(new Dimension(130, 30));
+		btnSave.setPreferredSize(new Dimension(130, 30));
+        
+		btnSave.addActionListener(new ActionListener() {
+
+			// TODO Data input fields must be public/private fields declared in class in order to access them from this method
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Phone p = new Phone();
+				p.setPrice(99);
+				p.setOperatingSystem("Android");
+				p.setResolutionX(4);
+				
+				// TODO Works but needs to be filled with real data
+				try {
+					sbr.addPhone(p);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		JPanel pnlSave = new JPanel(new FlowLayout(FlowLayout.RIGHT, 0, 0));
+		pnlSave.setOpaque(false);
+		pnlSave.setMaximumSize(new Dimension(350, 300));
+		pnlSave.add(btnSave);
+		return pnlSave;
+	}
+
+	public static void main(String[] args) throws NamingException {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) {
 
 		}
-		InsertPhone phone = new InsertPhone();
+
+		BeansManagerTeam6 beanManager = new BeansManagerTeam6();
+		StatelessBeanTeam6Remote sbr = beanManager.getStatelessBean();
+		
+		InsertPhone phone = new InsertPhone(sbr);
 		phone.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		phone.setSize(940, 750);
 		phone.setLocationRelativeTo(null);

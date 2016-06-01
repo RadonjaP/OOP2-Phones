@@ -8,8 +8,8 @@ import javax.swing.table.AbstractTableModel;
 import entity.Phone;
 
 public class TableModel extends AbstractTableModel {
-	String[] columns = { "Producer", "Model", "Operating System", "Cpu Speed", "Memory", "Current Offer" };
-	List<Phone> phonesList;
+	private String[] columns = { "Producer", "Model", "Operating System", "Cpu Speed", "Memory", "Current Offer" };
+	private List<Phone> phonesList;
 
 	TableModel(List<Phone> phonesList) {
 		this.phonesList = phonesList;
