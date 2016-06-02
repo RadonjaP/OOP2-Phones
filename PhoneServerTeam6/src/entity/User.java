@@ -1,6 +1,8 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.*;
 
 
@@ -35,6 +37,12 @@ public class User implements Serializable {
 	private String pictureAddress;
 
 	private String username;
+	
+	@ManyToMany(mappedBy="bidders", fetch=FetchType.EAGER)
+	private List<Auction> bidAuctions;
+	
+	@OneToMany(mappedBy="owner", fetch=FetchType.EAGER)
+	private List<Auction> ownAuctions;
 
 	public User() {
 	}
@@ -101,6 +109,23 @@ public class User implements Serializable {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	
+
+	public List<Auction> getBidAuctions() {
+		return bidAuctions;
+	}
+
+	public void setBidAuctions(List<Auction> bidAuctions) {
+		this.bidAuctions = bidAuctions;
+	}
+
+	public List<Auction> getOwnAuctions() {
+		return ownAuctions;
+	}
+
+	public void setOwnAuctions(List<Auction> ownAuctions) {
+		this.ownAuctions = ownAuctions;
 	}
 
 }

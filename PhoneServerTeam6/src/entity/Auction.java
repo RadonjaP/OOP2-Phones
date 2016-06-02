@@ -1,8 +1,11 @@
 package entity;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.List;
+import entity.User;
 
 
 /**
@@ -33,10 +36,14 @@ public class Auction implements Serializable {
 	@JoinColumn(name="ID_OWNER")
 	private User owner;
 
-	//bi-directional many-to-one association to User
-	@ManyToOne
-	@JoinColumn(name="ID_BIDDER")
-	private User bidder;
+    @ManyToMany
+    @JoinTable(name="USER_AUCTION",
+        joinColumns=
+            @JoinColumn(name="AUCTION_ID", referencedColumnName="ID"),
+        inverseJoinColumns=
+            @JoinColumn(name="USER_ID", referencedColumnName="ID")
+        )
+	private List<User> bidders;
 
 	//bi-directional many-to-one association to Comment
 	@OneToMany(mappedBy="auction")
@@ -85,12 +92,13 @@ public class Auction implements Serializable {
 		this.owner = owner;
 	}
 
-	public User getBidder() {
-		return bidder;
+
+	public List<User> getBidders() {
+		return bidders;
 	}
 
-	public void setBidder(User bidder) {
-		this.bidder = bidder;
+	public void setBidders(List<User> bidders) {
+		this.bidders = bidders;
 	}
 
 	public List<Comment> getComments() {
@@ -113,6 +121,13 @@ public class Auction implements Serializable {
 		comment.setAuction(null);
 
 		return comment;
+	}
+	
+	public void printBidders() {
+		System.out.println("Bidders auction:                          xxxx");
+		for (User u : bidders) {
+			System.out.println(u.getName());
+		}
 	}
 
 }

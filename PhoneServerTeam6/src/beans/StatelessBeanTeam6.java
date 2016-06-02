@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import entity.Auction;
 import entity.Phone;
 import entity.User;
 
@@ -41,7 +42,6 @@ public class StatelessBeanTeam6 implements StatelessBeanTeam6Remote {
 		em.persist(p);
 	}
 
-	//TODO Return list of phones
 	public List<Phone> searchPhones(Phone p) {
 		try {
 			String query = createPhoneSearchQuery(p);
